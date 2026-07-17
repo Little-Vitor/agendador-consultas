@@ -1,0 +1,30 @@
+services:
+  auth-db:
+    image: postgres:16-alpine
+    container_name: auth-db
+    restart: unless-stopped
+    environment:
+      POSTGRES_DB: auth_db
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+    ports:
+      - "5432:5432"
+    volumes:
+      - auth-db-data:/var/lib/postgresql/data
+
+  scheduler-db:
+    image: postgres:16-alpine
+    container_name: scheduler-db
+    restart: unless-stopped
+    environment:
+      POSTGRES_DB: scheduler_db
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+    ports:
+      - "5433:5432"
+    volumes:
+      - scheduler-db-data:/var/lib/postgresql/data
+
+volumes:
+  auth-db-data:
+  scheduler-db-data:
